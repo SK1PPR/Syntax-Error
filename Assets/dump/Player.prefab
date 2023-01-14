@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1359170077825661077}
   - component: {fileID: 1359170077825661074}
   - component: {fileID: 1359170077825661079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerCam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -130,9 +130,11 @@ GameObject:
   - component: {fileID: 1359170078608192300}
   - component: {fileID: 1359170078608192301}
   - component: {fileID: 1359170078608192298}
-  m_Layer: 0
+  - component: {fileID: 3114722990725504235}
+  - component: {fileID: 8136396352210977784}
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,3 +218,79 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3114722990725504235
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359170078608192299}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &8136396352210977784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359170078608192299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66710e22e5daa45fdb8e65093d8b15b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acccurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.06023227
+      outSlope: -0.06023227
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.56009036
+      value: 0.9662645
+      inSlope: -0.29927692
+      outSlope: -0.29927692
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.8509955
+    - serializedVersion: 3
+      time: 0.8188655
+      value: 0.6125806
+      inSlope: -2.3743355
+      outSlope: -2.3743355
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.3819096
+      outSlope: -3.3819096
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxspeed: 200
+  acc: 0
+  trailprefab: {fileID: 4399978526416422571, guid: 9c1e4b3e9778849cda07b95568b199a7,
+    type: 3}
+  accmag: 1
+  jumpforce: 0

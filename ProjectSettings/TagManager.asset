@@ -5,15 +5,16 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameMusic
+  - Trail
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
   - Water
   - UI
   - menu
-  - 
+  - Players
+  - Trail
   - 
   - 
   - 
