@@ -6,23 +6,24 @@ public class Trail : MonoBehaviour
 {
     //list needs to be converted to arrays
     List<Vector3> verticeslist = new List<Vector3>();
-    List<Vector2> uvlist = new List<Vector2>();
+    //List<Vector2> uvlist = new List<Vector2>();
     List<int> triangleslist = new List<int>();
 
     //please check again
     int index = 4;
     int indextri = 6;
-    bool uvbottom = false;
+    //bool uvbottom = false;
 
     //thearrays
     Vector3[] vertices = new Vector3[4];
-    Vector2[] uv = new Vector2[4];
+    //Vector2[] uv = new Vector2[4];
     int[] triangles = new int[6];
 
     //meshrelatedvariables
     [SerializeField]
     float wallheight = 2f;
     Mesh mesh;
+    float playerheightby2 = 1f;
 
 
 #region initialisinguv
@@ -31,22 +32,34 @@ public class Trail : MonoBehaviour
         Vector3 pos = transform.position;
         mesh = new Mesh();
         //initialisingvertices
-        verticeslist[0] = vertices[0] = pos;
-        verticeslist[1] = vertices[1] = pos + new Vector3(0, wallheight, 0);
-        verticeslist[2] = vertices[2] = pos;
-        verticeslist[3] = vertices[3] = pos + new Vector3(0, wallheight, 0);
+        vertices[0] = pos;
+        vertices[1] = pos + new Vector3(0, wallheight, 0);
+        vertices[2] = pos + new Vector3(0.1f, wallheight, 0.1f);
+        vertices[3] = pos + new Vector3(0.1f, 0, 0.1f);
+        verticeslist.Add(pos);
+        verticeslist.Add(pos + new Vector3(0, wallheight, 0));
+        verticeslist.Add(pos + new Vector3(0.1f, wallheight, 0.1f));
+        verticeslist.Add(pos + new Vector3(0.1f, 0, 0.1f));
         //initialisinguvs
+        /*
         uvlist[0] = uv[0] = new Vector2(0, 0);
         uvlist[1] = uv[1] = new Vector2(0, 1);
         uvlist[2] = uv[2] = new Vector2(1, 1);
         uvlist[3] = uv[3] = new Vector2(1, 0);
+        */
         //initialisingtriangles
-        triangleslist[0] = triangles[0] = 0;
-        triangleslist[1] = triangles[1] = 1;
-        triangleslist[2] = triangles[2] = 2;
-        triangleslist[3] = triangles[3] = 0;
-        triangleslist[4] = triangles[4] = 2;
-        triangleslist[5] = triangles[5] = 3;
+        triangles[0] = 0;
+        triangles[1] = 1;
+        triangles[2] = 2;
+        triangles[3] = 0;
+        triangles[4] = 2;
+        triangles[5] = 3;
+        triangleslist.Add(0);
+        triangleslist.Add(1);
+        triangleslist.Add(2);
+        triangleslist.Add(0);
+        triangleslist.Add(2);
+        triangleslist.Add(3);
 
 
     }
@@ -59,11 +72,10 @@ public class Trail : MonoBehaviour
     {
         //initmesh
         mesh.vertices = vertices;
-        mesh.uv = uv;
+        //mesh.uv = uv;
         mesh.triangles = triangles;
 
         GetComponent<MeshFilter>().mesh = mesh;
-        GetComponent<MeshCollider>().sharedMesh = mesh;
     }
 
 
@@ -72,8 +84,8 @@ public class Trail : MonoBehaviour
     public void straight(Vector3 pos)
     {
         //vertexupdate
-        verticeslist[index] = vertices[index - 2] = new Vector3(pos.x, pos.y, pos.z);
-        verticeslist[index + 1] = vertices[index - 1] = new Vector3(pos.x, pos.y + wallheight, pos.z);
+        verticeslist[index - 2] = vertices[index - 2] = new Vector3(pos.x, pos.y + (wallheight-playerheightby2), pos.z);
+        verticeslist[index - 1] = vertices[index - 1] = new Vector3(pos.x, pos.y - playerheightby2, pos.z);
 
 
         //trianglesupdate
@@ -90,27 +102,36 @@ public class Trail : MonoBehaviour
 
         //vertices
         index += 2;
-        verticeslist[index] = new Vector3(pos.x, pos.y, pos.z);
-        verticeslist[index + 1] = new Vector3(pos.x, pos.y + wallheight, pos.z);
+        verticeslist.Add(new Vector3(pos.x, pos.y + (wallheight-playerheightby2), pos.z));
+        verticeslist.Add(new Vector3(pos.x, pos.y - playerheightby2, pos.z));
         vertices = verticeslist.ToArray();
 
         //uv
+        /*
         int x = uvbottom ? 1 : 0;
-        uvlist[index] = new Vector2(x, 1);
-        uvlist[index + 1] = new Vector2(x, 0);
+        uvlist[index - 2] = new Vector2(x, 1);
+        uvlist[index - 1] = new Vector2(x, 0);
         uvbottom = !uvbottom;
         uv = uvlist.ToArray();
+        */
 
         //triangles
         indextri += 6;
-        triangleslist[indextri - 6] = index - 4;
-        triangleslist[indextri - 5] = index - 3;
-        triangleslist[indextri - 4] = index - 2;
-        triangleslist[indextri - 3] = index - 4;
-        triangleslist[indextri - 2] = index - 2;
-        triangleslist[indextri - 1] = index - 1;
+        triangleslist.Add(index - 4);
+        triangleslist.Add(index - 3);
+        triangleslist.Add(index - 2);
+        triangleslist.Add(index - 4);
+        triangleslist.Add(index - 2);
+        triangleslist.Add(index - 1);
         triangles = triangleslist.ToArray();
 
+    }
+
+    public void specialpos(Vector3 pos)
+    {
+        Vector3 offset = new Vector3(0.1f, 0, 0.1f);
+        verticeslist[0] = vertices[0] = pos + offset;
+        verticeslist[1] = vertices[1] = pos + offset + new Vector3(0, wallheight-playerheightby2, 0);
     }
 
 }
