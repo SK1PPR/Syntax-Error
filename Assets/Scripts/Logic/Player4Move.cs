@@ -8,6 +8,8 @@ public class Player4Move : MonoBehaviour
     public float maxspeed = 20f;
     [SerializeField]
     float acc;
+    public GameObject player4lose, check4;
+    public AudioSource source;
 
 
     //gameobjects and prefabs
@@ -16,11 +18,13 @@ public class Player4Move : MonoBehaviour
     Trail calltrail;
     trailcolision trailcoll;
     public GameObject trail2;
+    
 
     [SerializeField]
     float accmag = 1f;
 
     bool can = true;
+    public gamelogic4p script;
 
     private void Start()
     {
@@ -29,6 +33,8 @@ public class Player4Move : MonoBehaviour
         calltrail = a.GetComponent<Trail>();
         GameObject b = Instantiate(trail2,transform);
         trailcoll = b.GetComponent<trailcolision>();
+        //GameObject c = Instantiate(prefab);
+        //script = c.GetComponent<gamelogic4p>();
     }
 
     private void Update()
@@ -81,18 +87,25 @@ public class Player4Move : MonoBehaviour
     {
         if (other.CompareTag("Trail"))
         {
+            source.Play();
+            check4.SetActive(true);
+            player4lose.SetActive(true);
             Debug.Log("collided");
+            script.decrement();
             Destroy(gameObject);
         }
     }
     private void OnTriggerExit(Collider other){
         if(other.CompareTag("Bounds")){
+            player4lose.SetActive(true);
             Debug.Log("exited");
             Destroy(gameObject);
+            script.decrement();
+            check4.SetActive(true);
         }
     }
     //private void OnCollisionEnter(Collision collision)
     //{
-    //    Destroy(gameObject);
+    //   Destroy(gameObject);
     //}
 }

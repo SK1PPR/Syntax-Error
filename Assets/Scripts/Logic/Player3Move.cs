@@ -8,6 +8,8 @@ public class Player3Move : MonoBehaviour
     public float maxspeed = 20f;
     [SerializeField]
     float acc;
+    public GameObject player3lose, check3;
+    public AudioSource source;
 
 
     //gameobjects and prefabs
@@ -21,6 +23,7 @@ public class Player3Move : MonoBehaviour
     float accmag = 1f;
 
     bool can = true;
+    public gamelogic4p script;   
 
     private void Start()
     {
@@ -79,20 +82,29 @@ public class Player3Move : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Trail"))
+ //put toggle loser and explosion
+ 
+    if (other.CompareTag("Trail"))
         {
+            source.Play();
+            player3lose.SetActive(true);
+            check3.SetActive(true);
             Debug.Log("collided");
+            script.decrement();
             Destroy(gameObject);
         }
     }
     private void OnTriggerExit(Collider other){
         if(other.CompareTag("Bounds")){
+            check3.SetActive(true);
+            player3lose.SetActive(true);
             Debug.Log("exited");
+            script.decrement();
             Destroy(gameObject);
         }
     }
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    Destroy(gameObject);
-    //}
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
+    }
 }

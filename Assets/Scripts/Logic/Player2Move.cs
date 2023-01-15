@@ -8,7 +8,8 @@ public class Player2Move : MonoBehaviour
     public float maxspeed = 20f;
     [SerializeField]
     float acc;
-
+    public GameObject player2lose, check2;
+    public AudioSource source;
 
     //gameobjects and prefabs
     Rigidbody rb;
@@ -21,6 +22,7 @@ public class Player2Move : MonoBehaviour
     float accmag = 1f;
 
     bool can = true;
+    public gamelogic4p script;
 
     private void Start()
     {
@@ -80,13 +82,20 @@ public class Player2Move : MonoBehaviour
     {
         if (other.CompareTag("Trail"))
         {
+            source.Play();
+            check2.SetActive(true);
+            player2lose.SetActive(true);
             Debug.Log("collided");
+            script.decrement();
             Destroy(gameObject);
         }
     }
     private void OnTriggerExit(Collider other){
         if(other.CompareTag("Bounds")){
+            player2lose.SetActive(true);
+            check2.SetActive(true);
             Debug.Log("exited");
+            script.decrement();
             Destroy(gameObject);
         }
     }

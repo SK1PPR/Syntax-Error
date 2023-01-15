@@ -92,6 +92,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   maxspeed: 20
   acc: 0
+  player3lose: {fileID: 0}
+  source: {fileID: 0}
   trailprefab: {fileID: 4399978526416422571, guid: 9c1e4b3e9778849cda07b95568b199a7,
     type: 3}
   trail2: {fileID: 6130455038867897479, guid: 3253a8886f4b84ff0b09b0c4667c1b56, type: 3}
@@ -110,7 +112,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &1976896975478575314
 BoxCollider:
